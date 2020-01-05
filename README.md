@@ -70,19 +70,17 @@ console](https://console.developers.google.com/), and create new
 
 (def credentials
   {:creds
-   {:redirect-uri "http://localhost",
-    :grant-type "authorization_code",
-    :client-id ",,,,,",
+   {:client-id ",,,,,",
     :client-secret ",,,,,",
+    :scope ["https://www.googleapis.com/auth/gmail.send"
+            "https://www.googleapis.com/auth/spreadsheets"],
+    :redirect-uri "http://localhost",
+    :grant-type "authorization_code",
     :authorization-uri "https://accounts.google.com/o/oauth2/auth",
     :access-query-param :access_token,
     :access-token-uri "https://accounts.google.com/o/oauth2/token",
-    :scope
-    ["https://www.googleapis.com/auth/gmail.send"
-     "https://www.googleapis.com/auth/spreadsheets"],
     :access-type "online",
     :approval_prompt ""}})
-
 
 
 ;; get request link
