@@ -6,7 +6,6 @@
             [clj-oauth2.client :as oauth2]
             [jsonista.core :as jsonista]
             [looper.client :as looper]
-            [linked.core :as linked]
             [clojure.java.shell :as sh]))
 
 
@@ -182,7 +181,8 @@
 (defn- sheet-values' [access-token sheet-id range]
   (->>
    (oauth2/get
-    (str "https://sheets.googleapis.com/v4/spreadsheets/" sheet-id "/values/" range)
+    (str "https://sheets.googleapis.com/v4/spreadsheets/" sheet-id "/values/"
+         (or range (sheet-range sheet-id)))
     {:oauth2 access-token})
    :body
    decode-json
