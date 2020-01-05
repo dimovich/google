@@ -5,8 +5,10 @@
 
 ## [Clojure CLI/deps.edn](https://clojure.org/guides/getting_started)
 
-	dimovich/roll {:git/url "https://github.com/dimovich/google"
-	               :sha "d3371e8a84dfdaedac1d3d89a869384fce2f8c58"}
+``` clojure
+dimovich/roll {:git/url "https://github.com/dimovich/google"
+               :sha "d0410bd91472ca474aa134522e988f01d2d15a93"}
+```
 
 
 ## Usage
@@ -53,7 +55,10 @@
 
 ## Optaining Google Credentials
 
-Create a new project in [Google API console](https://console.developers.google.com/), and create new `OAuth client ID` credentials. Use the following code with your `client-id` and `client-secret`:
+Create a new project in [Google API
+console](https://console.developers.google.com/), and create new
+`OAuth client ID` credentials. Use the following code with your
+`client-id` and `client-secret`:
 
 ``` clojure
 ;; Google OAuth2 access token generation
