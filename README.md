@@ -6,8 +6,8 @@
 ## [Clojure CLI/deps.edn](https://clojure.org/guides/getting_started)
 
 ``` clojure
-dimovich/roll {:git/url "https://github.com/dimovich/google"
-               :sha "d0410bd91472ca474aa134522e988f01d2d15a93"}
+roll/google {:git/url "https://github.com/dimovich/google"
+             :sha "d0410bd91472ca474aa134522e988f01d2d15a93"}
 ```
 
 
@@ -57,8 +57,8 @@ dimovich/roll {:git/url "https://github.com/dimovich/google"
 
 Create a new project in [Google API
 console](https://console.developers.google.com/), and create new
-`OAuth client ID` credentials. Use the following code with your
-`client-id` and `client-secret`:
+`OAuth client ID` credentials. Run the following code at the REPL using
+your `client-id` and `client-secret`:
 
 ``` clojure
 ;; Google OAuth2 access token generation
