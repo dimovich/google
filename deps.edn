@@ -1,0 +1,13 @@
+{:paths ["src"]
+
+ :deps
+ {org.clojure/clojure {:mvn/version "1.10.1"}
+  frankiesardo/linked {:mvn/version "1.3.0"}
+  com.taoensso/timbre {:mvn/version "4.10.0"}
+  metosin/jsonista {:mvn/version "0.2.5"}
+  integrant {:mvn/version "0.7.0"}
+  stuarth/clj-oauth2 {:mvn/version "0.3.2"
+                      :exclusions [clj-http]}
+  com.farmlogs/looper
+  {:git/url "https://github.com/dimovich/looper"
+   :sha "6ac5a9b853b0cd41b81a4741d364fd256815d02d"}}}
