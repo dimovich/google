@@ -1,5 +1,6 @@
 
-# Google API for [Roll](https://github.com/dimovich/roll)
+# Google API for Clojure
+(Works nicely with [Roll](https://github.com/dimovich/roll))
 
 <br>
 
@@ -10,6 +11,7 @@ roll/google {:git/url "https://github.com/dimovich/google"
              :sha "d0410bd91472ca474aa134522e988f01d2d15a93"}
 ```
 
+<br>
 
 ## Usage
 
@@ -43,8 +45,12 @@ roll/google {:git/url "https://github.com/dimovich/google"
   (interpose "\n")
   (apply str)))
 
+
+;; You can easily add more api endpoints as needed.
+
 ```
 
+<br>
 
 ## Usage with Integrant
 
@@ -52,6 +58,7 @@ roll/google {:git/url "https://github.com/dimovich/google"
 {:roll/google "credentials.edn"}
 ```
 
+<br>
 
 ## Optaining Google Credentials
 
