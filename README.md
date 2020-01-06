@@ -8,7 +8,7 @@
 
 ``` clojure
 roll/google {:git/url "https://github.com/dimovich/google"
-             :sha "162da20e9cbaa2c32ad9d74a0d3d52af3ff495c5"}
+             :sha "f45c51d2dcdc02bfec0444bb91b13f026c1e5683"}
 ```
 
 <br>
