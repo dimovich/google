@@ -13,16 +13,16 @@
 (defonce ^:private credentials* (atom {}))
 
 
-(def ^:private json-mapper
-  (jsonista/object-mapper
-   {:decode-key-fn keywordize}))
-
-
-
 (defn- keywordize [s]
   (-> (string/lower-case s)
       (string/replace #"_| " "-")
       keyword))
+
+
+(def ^:private json-mapper
+  (jsonista/object-mapper
+   {:decode-key-fn keywordize}))
+
 
 
 (defn- decode-json [s]
