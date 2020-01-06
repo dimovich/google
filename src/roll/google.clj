@@ -6,32 +6,32 @@
             [clj-oauth2.client :as oauth2]
             [jsonista.core :as jsonista]
             [looper.client :as looper]
-            [clojure.java.shell :as sh]))
+            [clojure.java.io :as io]))
 
 
 
-(defonce credentials* (atom {}))
+(defonce ^:private credentials* (atom {}))
+
+
+(def ^:private json-mapper
+  (jsonista/object-mapper
+   {:decode-key-fn keywordize}))
 
 
 
-(defn keywordize [s]
+(defn- keywordize [s]
   (-> (string/lower-case s)
       (string/replace #"_| " "-")
       keyword))
-
-
-(def json-mapper
-  (jsonista/object-mapper
-   {:decode-key-fn keywordize}))
 
 
 (defn- decode-json [s]
   (some-> s (jsonista/read-value json-mapper)))
 
 
-
 (defn- backup [path]
-  (sh/sh "mv" path (str path ".1")))
+  (io/copy (io/file path)
+           (io/file (str path ".1"))))
 
 
 
@@ -59,7 +59,7 @@
         ;; expired token
         401 (let [path (:path @credentials*)]
               (info "refreshing token...")
-              ;; save old
+              ;; save a copy of old
               (backup path)
               ;; get new
               (->> (refresh-access-token
@@ -181,16 +181,16 @@
 (defn- sheet-values' [access-token sheet-id range]
   (->>
    (oauth2/get
-    (str "https://sheets.googleapis.com/v4/spreadsheets/" sheet-id "/values/"
-         (or range (sheet-range sheet-id)))
+    (str "https://sheets.googleapis.com/v4/spreadsheets/" sheet-id "/values/" range)
     {:oauth2 access-token})
    :body
    decode-json
    :values))
 
 
-(defn sheet-values [sheet-id range]
-  (with-auth sheet-values' sheet-id range))
+(defn sheet-values [sheet-id & [range]]
+  (let [range (or range (sheet-range sheet-id))]
+    (with-auth sheet-values' sheet-id range)))
 
 
 
@@ -244,16 +244,16 @@
 
   (def credentials
     {:creds
-     {:redirect-uri "http://localhost",
-      :grant-type "authorization_code",
-      :client-id ",,,",
+     {:client-id ",,,",
       :client-secret ",,,",
-      :authorization-uri "https://accounts.google.com/o/oauth2/auth",
-      :access-query-param :access_token,
-      :access-token-uri "https://accounts.google.com/o/oauth2/token",
       :scope
       ["https://www.googleapis.com/auth/gmail.send"
        "https://www.googleapis.com/auth/spreadsheets"],
+      :redirect-uri "http://localhost",
+      :grant-type "authorization_code",
+      :authorization-uri "https://accounts.google.com/o/oauth2/auth",
+      :access-token-uri "https://accounts.google.com/o/oauth2/token",
+      :access-query-param :access_token,
       :access-type "online",
       :approval_prompt ""}})
 
