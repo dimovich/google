@@ -220,9 +220,7 @@
   
   (def mail-template
     (->>
-     ["Content-Type: text/plain;"
-      "To: {{TO}}"
-      "From: {{FROM}}"
+     ["To: {{TO}}"
       "Subject: {{SUBJECT}}"
       "{{MESSAGE}}"]
      
@@ -272,12 +270,18 @@
 
   ;; get token
   
-  (oauth2/get-access-token (:creds credentials)
-                           {:code code}
-                           auth-req)
+  (def token (oauth2/get-access-token
+              (:creds credentials)
+              {:code code}
+              auth-req))
 
 
-  ;; update token in credentials file
+
+  ;; save credentials
+
+  (->> (assoc credentials :token token)
+       (spit "credentials.edn"))
+
 
   )
 
