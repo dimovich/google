@@ -8,7 +8,7 @@
 
 ``` clojure
 roll/google {:git/url "https://github.com/dimovich/google"
-             :sha "f45c51d2dcdc02bfec0444bb91b13f026c1e5683"}
+             :sha "7bd7facaea72ae39c61e3593a680fa7db84d4ce3"}
 ```
 
 <br>
@@ -36,9 +36,7 @@ roll/google {:git/url "https://github.com/dimovich/google"
 
 (google/send-message
  (->>
-  ["Content-Type: text/plain;"
-   "To: some@mail.com"
-   "From: my@gmail.com"
+  ["To: some@mail.com"
    "Subject: ..."
    "some message"]
      
